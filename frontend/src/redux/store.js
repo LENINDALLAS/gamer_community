@@ -3,7 +3,7 @@ import { createStore, combineReducers } from 'redux';
 import transactionReducer from "./slice/addSlice";
 
 const initialState = {
-    // transaction: []
+    chat: []
 };
 
 const reducer = combineReducers({
@@ -12,7 +12,7 @@ const reducer = combineReducers({
 
 const store = configureStore({
     reducer,
-    preloadedState: initialState
+    // preloadedState: initialState
 });
 
 export default store;

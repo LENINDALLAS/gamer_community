@@ -1,13 +1,26 @@
 import { View, TouchableOpacity, Text, StyleSheet, Image, TextInput } from 'react-native';
 import { Icon } from '@rneui/themed';
 import { useEffect, useState } from 'react';
-// import TabNavigator from "../screens/TabNavigator";
 import Header from "../components/HeaderSection";
-// import img from "../../assets/favicon.png"
+import { addFlagPost, getChats } from "../redux/actions/chatAction";
 
 function FlagMySpot(props) {
+
+
     const [slot, setSlot] = useState("");
     const [message, setMessage] = useState("");
+    const [user, setuser] = useState("Jyotsana");
+    const [team, setTeam] = useState("Fighters Gamers");
+
+    const handleSendMessage = () => {
+        if(!slot || !message || !user || !team) {
+            alert("Please fill all input fields to proceed.");
+            console.log("invalid", {slot, message, user, team});
+            return;
+        }
+        addFlagPost({ slot, message, user, team });
+        props.navigation.navigate('general');
+    }
 
     return (
         <View style={styles.flagContainer}>
@@ -40,7 +53,7 @@ function FlagMySpot(props) {
                         multiline={true}
                         numberOfLines={4} />
                 </View>
-                <TouchableOpacity style={styles.flagContainer_button} onPress={() => props.navigation.navigate('general')}>
+                <TouchableOpacity style={styles.flagContainer_button} onPress={() => handleSendMessage()}>
                     <Text style={styles.flagContainer_input_heading} >Send Message</Text>
                 </TouchableOpacity>
             </View>
